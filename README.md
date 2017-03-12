@@ -2,152 +2,144 @@ Database Settings
 
 Shops
 
-|         |        |   |
-|:-------:|:------:|:-:|
-|   id    |  int   |   |
-|  name   | string |   |
-| address |  text  |   |
-|   tel   | string |   |
-| picture | string |   |
+|  name   |  type  |  option  |
+|:-------:|:------:|:--------:|
+|  name   | string | NOT_NULL |
+| address | string | NOT_NULL |
+|   tel   | string |          |
+| picture | string | DEFAULT  |
 
-Staffs
+Staffs (deviceを使用)
 
-|          |        |   |
-|:--------:|:------:|:-:|
-|    id    |  int   |   |
-| shop_id  |  int   |   |
-| password | string |   |
+|     name     |  type  |      option      |
+|:------------:|:------:|:----------------:|
+| shop_id (FK) |  int   |                  |
+|    email     | string | NOT_NULL, UNIQUE |
+|   password   | string |     NOT_NULL     |
 
 
-Shop's details
+Shop_details
+|      name       |  type  | option |
+|:---------------:|:------:|:------:|
+|  shop_id (FK)   |  int   |        |
+|     access      | string |        |
+|     parking     | string |        |
+| operating_hours | string |        |
+|     holiday     | string |        |
+|     budget      | string |        |
+|     payment     | string |        |
+|   no_of_seats   |  int   |        |
+|  private_room   | string |        |
+|     smoking     | string |        |
+|       bar       | string |        |
 
-|              |      |   |
-|:------------:|:----:|:-:|
-|   shop_id    | int  |   |
-|    access    | text |   |
-|   parking    | text |   |
-|  ope_hours   | text |   |
-|   holiday    | text |   |
-|    budget    | text |   |
-|   payment    | text |   |
-| no_of_seats  | text |   |
-| private_room | text |   |
-|   smoking    | text |   |
-|     bar      | text |   |
+Shop_pictures
 
-Shop's pictures
-
-|         |        |   |
-|:-------:|:------:|:-:|
-|   id    |  int   |   |
-| shop_id |  int   |   |
-| picture | string |   |
-|  type   |  int   |   |
-| user_id |  int   |   |
+|     name     |  type  |  option  |
+|:------------:|:------:|:--------:|
+| shop_id (FK) |  int   |          |
+|   picture    | string | NOT_NULL |
+|     type     |  int   | NOT_NULL |
+| user_id (FK) |  int   |          |
 
 
 Menus
 
-|            |        |   |
-|:----------:|:------:|:-:|
-|     id     |  int   |   |
-|  shop_id   |  int   |   |
-|    name    | string |   |
-|   price    |  int   |   |
-| status_id  |  int   |   |
-|  type_id   |  int   |   |
-| want_count |  int   |   |
+|     name     |  type  |  option  |
+|:------------:|:------:|:--------:|
+| shop_id (FK) |  int   |          |
+|     name     | string | NOT_NULL |
+|    price     |  int   | NOT_NULL |
+|  status_id   |  int   | DEFAULT  |
+| type_id (FK) |  int   |          |
+| desire_count |  int   |          |
 
 
-Menu types
+Menu_types(drink/food/others)
 
-|      |      |   |
-|:----:|:----:|:-:|
-|  id  | int  |   |
-| type | text |   |
+| name |  type  | option |
+|:----:|:------:|:------:|
+| type | string |        |
 
 Menu_status
 
-|        |      |   |
-|:------:|:----:|:-:|
-|   id   | int  |   |
-| status | text |   |
+|  name  |  type  | option |
+|:------:|:------:|:------:|
+| status | string |        |
 
-Menu_reviews
+Menus_reviews
 
-|           |     |   |
-|:---------:|:---:|:-:|
-|  menu_id  | int |   |
-| review_id | int |   |
+|      name      | type |  option  |
+|:--------------:|:----:|:--------:|
+|  menu_id (FK)  | int  |          |
+| review_id (FK) | int  |          |
 
 Reviews
 
-|            |        |   |
-|:----------:|:------:|:-:|
-|     id     |  int   |   |
-|  content   |  text  |   |
-|  picture   | string |   |
-|  user_id   |  int   |   |
-|  menu_id   |  int   |   |
-| like_count |  int   |   |
+|     name     |  type  |  option  |
+|:------------:|:------:|:--------:|
+|   content    | string | NOT_NULL |
+|   picture    | string | NOT_NULL |
+| user_id (FK) |  int   |          |
+| menu_id (FK) |  int   |          |
+|  like_count  |  int   |          |
 
 
 Likes
 
-|           |     |   |
-|:---------:|:---:|:-:|
-|  user_id  | int |   |
-| review_id | int |   |
+|      name      | type | option |
+|:--------------:|:----:|:------:|
+|  user_id (FK)  | int  |        |
+| review_id (FK) | int  |        |
 
 Comments
 
-|           |      |   |
-|:---------:|:----:|:-:|
-|    id     | int  |   |
-| review_id | int  |   |
-|  user_id  | int  |   |
-|  content  | text |   |
+|      name      |  type  |  option  |
+|:--------------:|:------:|:--------:|
+| review_id (FK) |  int   |          |
+|  user_id (FK)  |  int   |          |
+|    content     | string | NOT_NULL |
 
 
 Users
 
-|          |        |   |
-|:--------:|:------:|:-:|
-|    id    |  int   |   |
-|   name   |  int   |   |
-|  email   | string |   |
-| password | string |   |
-| picture  | string |   |
+|   name   |  type  |      option      |
+|:--------:|:------:|:----------------:|
+|   name   |  int   |     NOT_NULL     |
+|  email   | string | NOT_NULL, UNIQUE |
+| password | string |     NOT_NULL     |
+| picture  | string |     DEFAULT      |
 
 
-Wants(食べたい)
 
-|         |     |   |
-|:-------:|:---:|:-:|
-| menu_id | int |   |
-| user_id | int |   |
+Desired_menus
 
-Tabeta(食べた)
+|     name     | type |  option  |
+|:------------:|:----:|:--------:|
+| menu_id (FK) | int  |          |
+| user_id (FK) | int  |          |
 
-|         |     |   |
-|:-------:|:---:|:-:|
-| menu_id | int |   |
-| user_id | int |   |
-|  date   |  ?  |   |
+Eaten_menus
 
-User's details
+|     name     | type |  option  |
+|:------------:|:----:|:--------:|
+| menu_id (FK) | int  |          |
+| user_id (FK) | int  |          |
+|     date     | date | NOT_NULL |
 
-|          |      |   |
-|:--------:|:----:|:-:|
-| user_id  | int  |   |
-| profile  | text |   |
-| birthday | date |   |
-|   sex    | text |   |
+User_profiles
+
+|     name     |  type  |  option  |
+|:------------:|:------:|:--------:|
+| user_id (FK) |  int   |          |
+|   profile    | string | DEFAULT  |
+|   birthday   |  date  |          |
+|    gender    |  enum  |          |
 
 
 Relationships
 
-|             |     |   |
-|:-----------:|:---:|:-:|
-| follower_id | int |   |
-| followed_id | int |   |
+|       name       | type |  option  |
+|:----------------:|:----:|:--------:|
+| follower_id (FK) | int  |          |
+| followed_id (FK) | int  |          |
