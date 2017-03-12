@@ -29,31 +29,31 @@ Shop_details
 |     holiday     | string |             |
 |     budget      | string |             |
 |     payment     | string |             |
-|   no_of_seats   |  int   |             |
+|      seats      |  int   |             |
 |  private_room   | string |             |
 |     smoking     | string |             |
 |       bar       | string |             |
 
 Shop_pictures
 
-|  name   |  type  |   option    |
-|:-------:|:------:|:-----------:|
-| shop_id |  int   | FOREIGN KEY |
-| picture | string |  NOT_NULL   |
-|  type   |  int   |  NOT_NULL   |
-| user_id |  int   | FOREIGN KEY |
+|  name   |  type  |       option        |
+|:-------:|:------:|:-------------------:|
+| shop_id |  int   |     FOREIGN KEY     |
+| picture | string |      NOT_NULL       |
+|  type   |  int   | NOT_NULL, default:0 |
+| user_id |  int   |     FOREIGN KEY     |
 
 
 Menus
 
-|     name     |  type  |       option       |
-|:------------:|:------:|:------------------:|
-|   shop_id    |  int   |    FOREIGN KEY     |
-|     name     | string |      NOT_NULL      |
-|    price     |  int   |      NOT_NULL      |
-|    status    |  int   |                    |
-|     type     |  int   |      NOT_NULL      |
-| desire_count |  int   | NO_NULL, default:0 |
+|     name     |  type  |       option        |
+|:------------:|:------:|:-------------------:|
+|   shop_id    |  int   |     FOREIGN KEY     |
+|     name     | string |      NOT_NULL       |
+|    price     |  int   |      NOT_NULL       |
+|    status    |  int   | NOT_NULL, default:0 |
+|     type     |  int   |      NOT_NULL       |
+| desire_count |  int   | NO_NULL, default:0  |
 
 
 
@@ -91,7 +91,7 @@ Comments
 |  content  | string |  NOT_NULL   |
 
 
-Users
+Users (deviseを使用)
 
 |   name   |  type  |      option      |
 |:--------:|:------:|:----------------:|
@@ -115,16 +115,15 @@ Eaten_menus
 |:-------:|:----:|:-----------:|
 | menu_id | int  | FOREIGN KEY |
 | user_id | int  | FOREIGN KEY |
-|  date   | date |  NOT_NULL   |
 
 User_profiles
 
-|   name   |  type  |   option    |
-|:--------:|:------:|:-----------:|
-| user_id  |  int   | FOREIGN KEY |
-| profile  | string |             |
-| birthday |  date  |             |
-|  gender  |  int   |             |
+|   name   |  type  |       option        |
+|:--------:|:------:|:-------------------:|
+| user_id  |  int   |     FOREIGN KEY     |
+| profile  | string |                     |
+| birthday |  date  |                     |
+|  gender  |  int   | NOT_NULL, default:0 |
 
 
 Relationships
