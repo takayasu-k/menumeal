@@ -53,7 +53,7 @@ Menus
 |    price     |  int   |      NOT_NULL       |
 |    status    |  int   | NOT_NULL, default:0 |
 |     type     |  int   |      NOT_NULL       |
-| desire_count |  int   | NO_NULL, default:0  |
+| desire_count |  int   | NOT_NULL, default:0 |
 
 
 
