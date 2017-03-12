@@ -7,9 +7,9 @@ Shops
 |  name   | string | NOT_NULL |
 | address | string | NOT_NULL |
 |   tel   | string |          |
-| picture | string | DEFAULT  |
+| picture | string |          |
 
-Staffs (deviceを使用)
+Staffs (deviseを使用)
 
 |   name   |  type  |      option      |
 |:--------:|:------:|:----------------:|
@@ -36,24 +36,24 @@ Shop_details
 
 Shop_pictures
 
-|  name   |  type  |     option      |
-|:-------:|:------:|:---------------:|
-| shop_id |  int   |   FOREIGN KEY   |
-| picture | string |    NOT_NULL     |
-|  type   |  int   | NOT_NULL, CHECK |
-| user_id |  int   |   FOREIGN KEY   |
+|  name   |  type  |   option    |
+|:-------:|:------:|:-----------:|
+| shop_id |  int   | FOREIGN KEY |
+| picture | string |  NOT_NULL   |
+|  type   |  int   |  NOT_NULL   |
+| user_id |  int   | FOREIGN KEY |
 
 
 Menus
 
-|     name     |  type  |      option       |
-|:------------:|:------:|:-----------------:|
-|   shop_id    |  int   |    FOREIGN KEY    |
-|     name     | string |     NOT_NULL      |
-|    price     |  int   |     NOT_NULL      |
-|    status    |  int   |  DEFAULT, CHECK   |
-|     type     |  int   |  NOT_NULL, CHECK  |
-| desire_count |  int   | NOT_NULL, DEFAULT |
+|     name     |  type  |       option       |
+|:------------:|:------:|:------------------:|
+|   shop_id    |  int   |    FOREIGN KEY     |
+|     name     | string |      NOT_NULL      |
+|    price     |  int   |      NOT_NULL      |
+|    status    |  int   |                    |
+|     type     |  int   |      NOT_NULL      |
+| desire_count |  int   | NO_NULL, default:0 |
 
 
 
@@ -66,13 +66,13 @@ Menus_reviews
 
 Reviews
 
-|    name    |  type  |      option       |
-|:----------:|:------:|:-----------------:|
-|  content   | string |     NOT_NULL      |
-|  picture   | string |     NOT_NULL      |
-|  user_id   |  int   |    FOREIGN KEY    |
-|  menu_id   |  int   |    FOREIGN KEY    |
-| like_count |  int   | NOT_NULL, DEFAULT |
+|    name    |  type  |       option        |
+|:----------:|:------:|:-------------------:|
+|  content   | string |      NOT_NULL       |
+|  picture   | string |      NOT_NULL       |
+|  user_id   |  int   |     FOREIGN KEY     |
+|  menu_id   |  int   |     FOREIGN KEY     |
+| like_count |  int   | NOT_NULL, default:0 |
 
 
 Likes
@@ -98,7 +98,7 @@ Users
 |   name   |  int   |     NOT_NULL     |
 |  email   | string | NOT_NULL, UNIQUE |
 | password | string |     NOT_NULL     |
-| picture  | string |     DEFAULT      |
+| picture  | string |                  |
 
 
 
@@ -122,7 +122,7 @@ User_profiles
 |   name   |  type  |   option    |
 |:--------:|:------:|:-----------:|
 | user_id  |  int   | FOREIGN KEY |
-| profile  | string |   DEFAULT   |
+| profile  | string |             |
 | birthday |  date  |             |
 |  gender  |  int   |             |
 
