@@ -56,29 +56,34 @@ belongs_to :user
 <br>
 Menus
 
-|     name     |  type  |       option        |
-|:------------:|:------:|:-------------------:|
-|   shop_id    |  int   |     FOREIGN KEY     |
-|     name     | string |      NOT_NULL       |
-|    price     |  int   |      NOT_NULL       |
-|    status    |  int   | NOT_NULL, default:0 |
-|     type     |  int   |      NOT_NULL       |
+|     name     |  type  |        option         |
+|:------------:|:------:|:---------------------:|
+|   shop_id    |  int   |      FOREIGN KEY      |
+|     name     | string |       NOT_NULL        |
+|    price     |  int   |       NOT_NULL        |
+|    status    |  int   |  NOT_NULL, default:0  |
+|     type     |  int   |       NOT_NULL        |
+| desire_count |  int   | NOT_NULL, default = 0 |
+| eaten_count  |  int   | NOT_NULL, default = 0 |
 belongs_to :shop  
-has_many :reviews
+has_many :reviews  
+has_many :desired_menus  
+has_many :eaten_menus
+
 
 
 <br>
 Reviews
 
-|    name    |  type  |       option        |
-|:----------:|:------:|:-------------------:|
-|  content   | string |      NOT_NULL       |
-|  picture   | string |      NOT_NULL       |
-|  user_id   |  int   |     FOREIGN KEY     |
-|  menu_id   |  int   |     FOREIGN KEY     |
+|    name     |  type  |        option         |
+|:-----------:|:------:|:---------------------:|
+|   content   | string |       NOT_NULL        |
+|   picture   | string |       NOT_NULL        |
+|   user_id   |  int   |      FOREIGN KEY      |
+|   menu_id   |  int   |      FOREIGN KEY      |
+| likes_count |  int   | NOT_NULL, default = 0 |
 belongs_to :user  
 belongs_to :menu  
-has_one :menu  
 has_many :likes  
 has_many :comments
 
@@ -89,7 +94,7 @@ Likes
 |:---------:|:----:|:-----------:|
 |  user_id  | int  | FOREIGN KEY |
 | review_id | int  | FOREIGN KEY |
-belongs_to :review  
+belongs_to :review, counter_cache: :likes_count  
 belongs_to :user
 
 <br>
@@ -133,7 +138,7 @@ Desired_menus
 | menu_id | int  | FOREIGN KEY |
 | user_id | int  | FOREIGN KEY |
 belongs_to :user  
-belongs_to :menu
+belongs_to :menu, counter_cache: :desire_count
 
 <br>
 Eaten_menus
@@ -143,7 +148,7 @@ Eaten_menus
 | menu_id | int  | FOREIGN KEY |
 | user_id | int  | FOREIGN KEY |
 belongs_to :user  
-belongs_to :menu
+belongs_to :menu, counter_cache: :eaten_count
 
 <br>
 User_profiles
