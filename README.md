@@ -8,7 +8,10 @@ Shops
 | address | string | NOT_NULL |
 |   tel   | string |          |
 | picture | string |          |
+has_one :staff, :shop_detail  
+has_many :shop_pictures, :menus
 
+<br>
 Staffs (deviseを使用)
 
 |   name   |  type  |      option      |
@@ -16,8 +19,9 @@ Staffs (deviseを使用)
 | shop_id  |  int   |   FOREIGN KEY    |
 |  email   | string | NOT_NULL, UNIQUE |
 | password | string |     NOT_NULL     |
+belongs_to :shop
 
-
+<br>
 Shop_details
 
 |      name       |  type  |   option    |
@@ -33,7 +37,9 @@ Shop_details
 |  private_room   | string |             |
 |     smoking     | string |             |
 |       bar       | string |             |
+belongs_to :shop
 
+<br>
 Shop_pictures
 
 |  name   |  type  |       option        |
@@ -42,8 +48,9 @@ Shop_pictures
 | picture | string |      NOT_NULL       |
 |  type   |  int   | NOT_NULL, default:0 |
 | user_id |  int   |     FOREIGN KEY     |
+belongs_to :shop, :user
 
-
+<br>
 Menus
 
 |     name     |  type  |       option        |
@@ -54,16 +61,11 @@ Menus
 |    status    |  int   | NOT_NULL, default:0 |
 |     type     |  int   |      NOT_NULL       |
 | desire_count |  int   | NOT_NULL, default:0 |
+belongs_to :shop  
+has_many :reviews
 
 
-
-Menus_reviews
-
-|   name    | type |   option    |
-|:---------:|:----:|:-----------:|
-|  menu_id  | int  | FOREIGN KEY |
-| review_id | int  | FOREIGN KEY |
-
+<br>
 Reviews
 
 |    name    |  type  |       option        |
@@ -73,15 +75,20 @@ Reviews
 |  user_id   |  int   |     FOREIGN KEY     |
 |  menu_id   |  int   |     FOREIGN KEY     |
 | like_count |  int   | NOT_NULL, default:0 |
+belongs_to :user, :menu  
+has_one :menu  
+has_many :likes :comments
 
-
+<br>
 Likes
 
 |   name    | type |   option    |
 |:---------:|:----:|:-----------:|
 |  user_id  | int  | FOREIGN KEY |
 | review_id | int  | FOREIGN KEY |
+belongs_to :review, :user
 
+<br>
 Comments
 
 |   name    |  type  |   option    |
@@ -89,8 +96,9 @@ Comments
 | review_id |  int   | FOREIGN KEY |
 |  user_id  |  int   | FOREIGN KEY |
 |  content  | string |  NOT_NULL   |
+belongs_to :review, :user
 
-
+<br>
 Users (deviseを使用)
 
 |   name   |  type  |      option      |
@@ -99,23 +107,36 @@ Users (deviseを使用)
 |  email   | string | NOT_NULL, UNIQUE |
 | password | string |     NOT_NULL     |
 | picture  | string |                  |
+has_one :user_profile  
+has_many :reviews, :desired_menus, :eaten_menus  
+has_many :active_relationships,  class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy  
+ has_many :passive_relationships, class_name:  "Relationship",
+                                  foreign_key: "followed_id",
+                                  dependent:   :destroy  
+ has_many :following, through: :active_relationships,  source: :followed  
+ has_many :followers, through: :passive_relationships, source: :follower
 
-
-
+<br>
 Desired_menus
 
 |  name   | type |   option    |
 |:-------:|:----:|:-----------:|
 | menu_id | int  | FOREIGN KEY |
 | user_id | int  | FOREIGN KEY |
+belongs_to :user, :menu
 
+<br>
 Eaten_menus
 
 |  name   | type |   option    |
 |:-------:|:----:|:-----------:|
 | menu_id | int  | FOREIGN KEY |
 | user_id | int  | FOREIGN KEY |
+belongs_to :user, :menu
 
+<br>
 User_profiles
 
 |   name   |  type  |       option        |
@@ -124,11 +145,14 @@ User_profiles
 | profile  | string |                     |
 | birthday |  date  |                     |
 |  gender  |  int   | NOT_NULL, default:0 |
+belongs_to :user
 
-
+<br>
 Relationships
 
 |    name     | type |   option    |
 |:-----------:|:----:|:-----------:|
 | follower_id | int  | FOREIGN KEY |
 | followed_id | int  | FOREIGN KEY |
+belongs_to :follower, class_name: "User"  
+belongs_to :followed, class_name: "User"
