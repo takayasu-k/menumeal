@@ -8,8 +8,10 @@ Shops
 | address | string | NOT_NULL |
 |   tel   | string |          |
 | picture | string |          |
-has_one :staff, :shop_detail  
-has_many :shop_pictures, :menus
+has_one :staff  
+has_one :shop_detail  
+has_many :shop_pictures  
+has_many :menus
 
 <br>
 Staffs (deviseを使用)
@@ -48,7 +50,8 @@ Shop_pictures
 | picture | string |      NOT_NULL       |
 |  type   |  int   | NOT_NULL, default:0 |
 | user_id |  int   |     FOREIGN KEY     |
-belongs_to :shop, :user
+belongs_to :shop  
+belongs_to :user
 
 <br>
 Menus
@@ -60,7 +63,6 @@ Menus
 |    price     |  int   |      NOT_NULL       |
 |    status    |  int   | NOT_NULL, default:0 |
 |     type     |  int   |      NOT_NULL       |
-| desire_count |  int   | NOT_NULL, default:0 |
 belongs_to :shop  
 has_many :reviews
 
@@ -74,10 +76,11 @@ Reviews
 |  picture   | string |      NOT_NULL       |
 |  user_id   |  int   |     FOREIGN KEY     |
 |  menu_id   |  int   |     FOREIGN KEY     |
-| like_count |  int   | NOT_NULL, default:0 |
-belongs_to :user, :menu  
+belongs_to :user  
+belongs_to :menu  
 has_one :menu  
-has_many :likes :comments
+has_many :likes  
+has_many :comments
 
 <br>
 Likes
@@ -86,7 +89,8 @@ Likes
 |:---------:|:----:|:-----------:|
 |  user_id  | int  | FOREIGN KEY |
 | review_id | int  | FOREIGN KEY |
-belongs_to :review, :user
+belongs_to :review  
+belongs_to :user
 
 <br>
 Comments
@@ -96,19 +100,22 @@ Comments
 | review_id |  int   | FOREIGN KEY |
 |  user_id  |  int   | FOREIGN KEY |
 |  content  | string |  NOT_NULL   |
-belongs_to :review, :user
+belongs_to :review  
+belongs_to :user
 
 <br>
 Users (deviseを使用)
 
 |   name   |  type  |      option      |
 |:--------:|:------:|:----------------:|
-|   name   |  int   |     NOT_NULL     |
+|   name   | string |     NOT_NULL     |
 |  email   | string | NOT_NULL, UNIQUE |
 | password | string |     NOT_NULL     |
 | picture  | string |                  |
 has_one :user_profile  
-has_many :reviews, :desired_menus, :eaten_menus  
+has_many :reviews  
+has_many :desired_menus  
+has_many :eaten_menus  
 has_many :active_relationships,  class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy  
@@ -125,7 +132,8 @@ Desired_menus
 |:-------:|:----:|:-----------:|
 | menu_id | int  | FOREIGN KEY |
 | user_id | int  | FOREIGN KEY |
-belongs_to :user, :menu
+belongs_to :user  
+belongs_to :menu
 
 <br>
 Eaten_menus
@@ -134,7 +142,8 @@ Eaten_menus
 |:-------:|:----:|:-----------:|
 | menu_id | int  | FOREIGN KEY |
 | user_id | int  | FOREIGN KEY |
-belongs_to :user, :menu
+belongs_to :user  
+belongs_to :menu
 
 <br>
 User_profiles
@@ -156,3 +165,14 @@ Relationships
 | followed_id | int  | FOREIGN KEY |
 belongs_to :follower, class_name: "User"  
 belongs_to :followed, class_name: "User"
+
+
+<br>
+Admin_users
+
+|   name    |  type  |       option        |
+|:---------:|:------:|:-------------------:|
+|   email   | string |  NOT_NULL, UNIQUE   |
+| password  | string |  NOT_NULL, UNIQUE   |
+|   name    | string |      NOT_NULL       |
+| authority |  int   | NOT_NULL, default:0 |
