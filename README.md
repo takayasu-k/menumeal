@@ -2,12 +2,12 @@ Database Settings
 
 Shops
 
-|  name   |  type  |  option  |
-|:-------:|:------:|:--------:|
-|  name   | string | NOT_NULL |
-| address | string | NOT_NULL |
-|   tel   | string |          |
-| picture | string |          |
+|      name       |  type  |  option  |
+|:---------------:|:------:|:--------:|
+|      name       | string | NOT_NULL |
+|     address     | string | NOT_NULL |
+|       tel       | string |          |
+| profile_picture | string |          |
 
 has_one :staff  
 has_one :shop_detail  
@@ -60,15 +60,15 @@ belongs_to :user
 <br>
 Menus
 
-|     name     |  type  |        option         |
-|:------------:|:------:|:---------------------:|
-|   shop_id    |  int   |      FOREIGN KEY      |
-|     name     | string |       NOT_NULL        |
-|    price     |  int   |       NOT_NULL        |
-|    status    |  int   |  NOT_NULL, default:0  |
-|     type     |  int   |       NOT_NULL        |
-| desire_count |  int   | NOT_NULL, default = 0 |
-| eaten_count  |  int   | NOT_NULL, default = 0 |
+|     name     |  type  |       option        |
+|:------------:|:------:|:-------------------:|
+|   shop_id    |  int   |     FOREIGN KEY     |
+|     name     | string |      NOT_NULL       |
+|    price     |  int   |      NOT_NULL       |
+|    status    |  int   | NOT_NULL, default:0 |
+|     type     |  int   |      NOT_NULL       |
+| desire_count |  int   | NOT_NULL, default:0 |
+| eaten_count  |  int   | NOT_NULL, default:0 |
 
 belongs_to :shop  
 has_many :reviews  
@@ -80,13 +80,13 @@ has_many :eaten_menus
 <br>
 Reviews
 
-|    name     |  type  |        option         |
-|:-----------:|:------:|:---------------------:|
-|   content   | string |       NOT_NULL        |
-|   picture   | string |       NOT_NULL        |
-|   user_id   |  int   |      FOREIGN KEY      |
-|   menu_id   |  int   |      FOREIGN KEY      |
-| likes_count |  int   | NOT_NULL, default = 0 |
+|    name     |  type  |       option        |
+|:-----------:|:------:|:-------------------:|
+|   content   | string |      NOT_NULL       |
+|   picture   | string |      NOT_NULL       |
+|   user_id   |  int   |     FOREIGN KEY     |
+|   menu_id   |  int   |     FOREIGN KEY     |
+| likes_count |  int   | NOT_NULL, default:0 |
 
 belongs_to :user  
 belongs_to :menu  
@@ -191,6 +191,6 @@ Admin_users
 |   name    |  type  |       option        |
 |:---------:|:------:|:-------------------:|
 |   email   | string |  NOT_NULL, UNIQUE   |
-| password  | string |  NOT_NULL, UNIQUE   |
+| password  | string |      NOT_NULL       |
 |   name    | string |      NOT_NULL       |
 | authority |  int   | NOT_NULL, default:0 |
