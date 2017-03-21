@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: rails-hinagata_development
+  database: menumeal_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails-hinagata_test
+  database: menumeal_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: rails-hinagata_production
-  username: rails-hinagata
-  password: <%= ENV['RAILS-HINAGATA_DATABASE_PASSWORD'] %>
+  database: menumeal_production
+  username: menumeal
+  password: <%= ENV['MENUMEAL_DATABASE_PASSWORD'] %>
